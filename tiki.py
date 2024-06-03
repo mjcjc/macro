@@ -1,11 +1,14 @@
 from tkinter import *
 from src import reservation
-
+import tkinter.ttk as ttk
 def ticket_frame():
     frame3.lift()
     prev_frame = Frame(root, relief='solid')
     prev_frame.place(x=0, y=100, width=400, height=350)
     Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
+    combobox = ttk.Combobox(root, height=5, values=reservation.dates)
+    combobox.set("날짜 클릭")
+    combobox.pack()
 
 def hair_frame():
     frame2.lift()
