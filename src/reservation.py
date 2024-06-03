@@ -49,39 +49,7 @@ for i in range(1,7):
                 date = element.find('span', class_='num').text
                 #ates.append(date)
                 print(date)
-                
+
 driver.quit()
-
-                #현재 element 값엔 예약이 가능한 값만 들어가져 있다.
-
-
-                # #여기 for문 코드 잘못짠 거 같음 안들어가짐. 다시생각.
-                # for i in range(1,7):
-                #     selectTime = f'#root > main > section.section_calendar > div > div.section_content > div.time_area > div > ul > li:nth-child({i}) > button'
-                #     getTimes = soup.select(selectTime)
-                #     for abletime in getTimes:
-                #         if 'btn_time' in abletime.get('class',[]) and 'unselectable' not in abletime.get('class',[]):
-                #             print('여기는 시간')
-                #             print(abletime)
-                    
-#driver.get('http://naver.com')
-
-# 다 만들어지면 함수 활성화 시켜서 selenium 에 url값 get하기.
-
-
-
- #area까지는 css 속성이 접근 가능한데 그 이후부턴 동적이라 selenium 이용해야할듯.
-
-# getDays = soup.select('.calendar_area')
-# print(getDays)
-# for tr in getDays :
-#     print('a')
-#     rank = tr.select_one('.button.calendar_date.unselectable')
-#     if rank is not None:
-#         print(rank.text, end=" ")
-#     title = tr.select_one('button.calendar_date')
-#     if title is not None:
-#         print(title.text)
-#print(title)
 
 
