@@ -1,28 +1,32 @@
 from tkinter import *
 from src import reservation
 import tkinter.ttk as ttk
+
+
+#티켓 화면
 def ticket_frame():
     frame3.lift()
     prev_frame = Frame(root, relief='solid')
     prev_frame.place(x=0, y=100, width=400, height=350)
     Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
-    combobox = ttk.Combobox(root, height=5, values=reservation.dates)
-    combobox.set("날짜 클릭")
-    combobox.pack()
-
+    
+#    헤어숍 화면
 def hair_frame():
     frame2.lift()
     prev_frame = Frame(root, relief='solid')
     prev_frame.place(x=0, y=100, width=400, height=350)
     Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
-
+    combobox = ttk.Combobox(root, height=5, values=reservation.dates)
+    combobox.place(x=100, y=100)  
+    combobox.set("날짜 클릭")
+    
+# 메인화면
 def main_frame():
     frame1.lift()
     btn_frame = Frame(root, relief='solid')
     btn_frame.place(x=0, y=100, width=400, height=350)
     Button(btn_frame,text='헤어숍', command=hair_frame).pack()
     Button(btn_frame,text='티켓 예매', command=ticket_frame).pack()
-
 
 root = Tk()
 root.title("예약 매크로")

@@ -47,7 +47,7 @@ for i in range(1,7):
             # calendar_date 클래스를 가진 요소만을 선택하고, unselectable 클래스를 가지지 않는 요소만을 선택합니다.
             if 'calendar_date' in element.get('class', []) and 'unselectable' not in element.get('class', []):
                 date = element.find('span', class_='num').text
-                #ates.append(date)
+                dates.append(date)
                 print(date)
 
 driver.quit()
