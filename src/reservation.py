@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
+
 # TODO
 # 헤어숍 방향성
 # 리퀘스트 받는 것은 여기서 하기.
@@ -35,13 +36,14 @@ time.sleep(3)
 
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
-getDays = soup.select('#root > main > section.section_calendar > div > div.section_content > div.calendar_area > div > table > tbody > tr:nth-child(1) > td:nth-child(7) > button')
-#element 값에서 calendar_date 값만 있는 걸 가져와서 예약이 가능한 걸 저장해주는 변수가 필요함
-#지금 조건문에서 발동은 하는데 문제는 값이 다 들어가서 조건문의 조건을 다시 작성해야함.
+
 dates = []
+
+#날짜에 따라 예약 가능한 값 넣어주는 거 성공, 이제 시간별로 해줘야 함.
 for i in range(1,7):
     for j in range(1,8):
         selector = f'#root > main > section.section_calendar > div > div.section_content > div.calendar_area > div > table > tbody > tr:nth-child({i}) > td:nth-child({j}) > button.calendar_date'
+        seo =f'#root > main > section.section_calendar > div > div.section_content'
         elements = soup.select(selector)
         for element in elements:
             # calendar_date 클래스를 가진 요소만을 선택하고, unselectable 클래스를 가지지 않는 요소만을 선택합니다.
