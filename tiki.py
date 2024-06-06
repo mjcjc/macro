@@ -5,70 +5,68 @@ import tkinter.ttk as ttk
 
 
 
+
+times = []
+getimes = None
+getid = None
+getpw = None
+getpw2 = None
+comboboxday = None
+#버튼으로 값을 넣어줬다고 얘기를 안 줬음.
+
+def hair_frame():
+    global comboboxday
+    frame2.lift()
+    prev_frame = Frame(root, relief='solid')
+    prev_frame.place(x=0, y=100, width=400, height=350)
+    Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
+    comboboxday = ttk.Combobox(root, height=5, values=reservation.getDays())
+    comboboxday.place(x=100, y=80)  
+    comboboxday.set("날짜 클릭")
+    prev_frame2 = Frame(root, relief='solid')
+    prev_frame2.place(x=200, y=100, width= 100, height= 100)
+    Button(prev_frame2,text='날짜 선택', command= abletime).pack(side='right')
+    
+    #getdays를 하고 버튼으로 확인을 한 뒤에 콤보박스를 또 띄워줘야함. 그걸 안해줘서 지금 값이 안 넘어간 거 같음.
+    #Button(prev_frame,text='날짜 확인',).pack
+    
+    
+    #이거 참고하면서 내 코드 수정하면 될 듯 show기능 좋은 거 같다.
+    label = ttk.Label(root, text="Login :")
+    label.place(x=90, y=160)
+
+    idText = ttk.Entry(root)
+    idText.place(x=140, y=160)
+
+    label = ttk.Label(root, text="Password :")
+    #x값 수정 필요
+    label.place(x=60, y=180)
+
+    pwText = ttk.Entry(root, show="*")
+    pwText.place(x=140, y=180)
+
+    label = ttk.Label(root, text="2차 비밀번호 :")
+    #x값 수정 필요
+    label.place(x=60, y=200)
+
+    pw2Text = ttk.Entry(root, show="*")
+    pw2Text.place(x=140, y=200)
+def res_day():
+    return comboboxday.get()
+
+def abletime():
+    
+    comboboxtime = ttk.Combobox(root, height=6, values=reservation.getTimes())
+    comboboxtime.place(x=100, y=100)
+    comboboxtime.set("시간 클릭")
+    getimes = comboboxtime.get()
+    
 #티켓 화면
 def ticket_frame():
     frame3.lift()
     prev_frame = Frame(root, relief='solid')
     prev_frame.place(x=0, y=100, width=400, height=350)
     Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
-
-times = ['12:00','2:00','3:00','4:00','5:00','6:00']
-getimes = None
-getdays = None
-getid = None
-getpw = None
-getpw2 = None
-#헤어숍 화면
-#여기에다가 아이디 비밀번호 2차 비밀번호 넣는거 해야함.
-#일단 성공 했는데 
-def hair_frame():
-    frame2.lift()
-    prev_frame = Frame(root, relief='solid')
-    prev_frame.place(x=0, y=100, width=400, height=350)
-    Button(prev_frame, text='메인으로 가기', command= main_frame).pack(side='right')
-    comboboxday = ttk.Combobox(root, height=5, values=reservation.dates)
-    comboboxday.place(x=100, y=80)  
-    comboboxday.set("날짜 클릭")
-    comboboxtime = ttk.Combobox(root, height=6, values=times)
-    comboboxtime.place(x=100, y=100)
-    getdays = comboboxtime.get()
-    comboboxtime.set("시간 클릭")
-    getimes = comboboxtime.get()
-    
-
-    #수정 끝났고 이제 값 받아서 payment에 넘겨서 결제하는거 해야함.
-    # idText = Entry(root, width=10)
-    # idText.place(x=100, y=140)  # place 메서드를 사용하여 위치 지정
-    # idText.insert(0,"아이디")
-    # getid = idText.get()
-    # pwText = Entry(root, width=10)
-    # pwText.place(x=100, y=160)
-    # pwText.insert(0,"비밀번호")
-    # getpw = pwText.get()
-    # pw2Text = Entry(root,width=10)
-    # pw2Text.place(x=100, y=180)
-    # pw2Text.insert(0,"2차 비밀번호")
-    # getpw2 = pw2Text.get()
-
-    #이거 참고하면서 내 코드 수정하면 될 듯 show기능 좋은 거 같다.
-    label = ttk.Label(root, text="Login :")
-    label.place(x=90, y=160)
-
-    idText = ttk.Entry(root)
-    idText.place(x=100, y=160)
-
-    label = ttk.Label(root, text="Password :")
-    label.place(x=90, y=180)
-
-    pwText = ttk.Entry(root, show="*")
-    pwText.place(x=100, y=180)
-
-    label = ttk.Label(root, text="2차 비밀번호 :")
-    label.place(x=90, y=200)
-
-    pw2Text = ttk.Entry(root, show="*")
-    pw2Text.place(x=100, y=200)
-    
 # 메인화면
 def main_frame():
     frame1.lift()
@@ -97,7 +95,7 @@ Label(frame2, text="헤어숍", font=('consolas', 20)).pack()
 Label(frame1, text="메인", font=('consolas', 20)).pack()
 
 Button(btn_frame, text='헤어숍', command=hair_frame).pack()
-Button(btn_frame, text='티켓 예매', command=ticket_frame).pack()
+#Button(btn_frame, text='티켓 예매', command=ticket_frame).pack()
 
 root.mainloop()
 
