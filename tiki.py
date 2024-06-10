@@ -3,19 +3,19 @@ from src import reservation
 import tkinter.ttk as ttk
 
 
-
-
-
 times = []
 getimes = None
 getid = None
 getpw = None
 getpw2 = None
 comboboxday = None
-#버튼으로 값을 넣어줬다고 얘기를 안 줬음.
+combotimes = None
 
 def hair_frame():
     global comboboxday
+    global getid
+    global getpw
+    global getpw2
     frame2.lift()
     prev_frame = Frame(root, relief='solid')
     prev_frame.place(x=0, y=100, width=400, height=350)
@@ -23,20 +23,22 @@ def hair_frame():
     comboboxday = ttk.Combobox(root, height=5, values=reservation.getDays())
     comboboxday.place(x=100, y=80)  
     comboboxday.set("날짜 클릭")
-    prev_frame2 = Frame(root, relief='solid')
-    prev_frame2.place(x=200, y=100, width= 100, height= 100)
-    Button(prev_frame2,text='날짜 선택', command= abletime).pack(side='right')
+    day_select = Frame(root, relief='solid')
+    day_select.place(x=200, y=100, width= 100, height= 100)
+    Button(day_select,text='날짜 선택', command= abletime).pack(side='right')
+    final_select =Frame(root, relief='solid')
+    final_select.place(x=300, y=120, width= 50, height=50)
+    Button(final_select,text='제출', command=final_frame).pack(side='right')
     
-    #getdays를 하고 버튼으로 확인을 한 뒤에 콤보박스를 또 띄워줘야함. 그걸 안해줘서 지금 값이 안 넘어간 거 같음.
-    #Button(prev_frame,text='날짜 확인',).pack
-    
-    
-    #이거 참고하면서 내 코드 수정하면 될 듯 show기능 좋은 거 같다.
     label = ttk.Label(root, text="Login :")
     label.place(x=90, y=160)
-
+    # 이거 여기 다시 생각해야해 그냥 이 함수에서 받아오면 getid나 그런 값들이 paymentF에서 분명 None으로 들어갈거임
+    #구조를 생각해보자, 먼저 클릭하고 날짜를 클릭한 뒤 날짜 확인을 하면 reservation으로 이동을 하고 거기서 시간값을 다시 받아오고
+    #그 시간값 을 받아서 다시 reservation times를 가져오고 그 시간을 선택함.
+    #그리고 아이디 비밀번호를 입력을 
     idText = ttk.Entry(root)
     idText.place(x=140, y=160)
+    getid = idText.get()
 
     label = ttk.Label(root, text="Password :")
     #x값 수정 필요
@@ -44,6 +46,7 @@ def hair_frame():
 
     pwText = ttk.Entry(root, show="*")
     pwText.place(x=140, y=180)
+    getpw = pwText.get()
 
     label = ttk.Label(root, text="2차 비밀번호 :")
     #x값 수정 필요
@@ -51,16 +54,21 @@ def hair_frame():
 
     pw2Text = ttk.Entry(root, show="*")
     pw2Text.place(x=140, y=200)
+    getpw2 = pw2Text.get()
+
+def abletime(): 
+    global combotimes
+    combotimes = ttk.Combobox(root, height=6, values=reservation.getTimes())
+    combotimes.place(x=100, y=100)
+    combotimes.set("시간 클릭")
+
 def res_day():
     return comboboxday.get()
 
-def abletime():
-    
-    comboboxtime = ttk.Combobox(root, height=6, values=reservation.getTimes())
-    comboboxtime.place(x=100, y=100)
-    comboboxtime.set("시간 클릭")
-    getimes = comboboxtime.get()
-    
+
+def res_times():
+    #쓰레기값 들어감 ㅋㅋ시바
+    return combotimes.get()
 #티켓 화면
 def ticket_frame():
     frame3.lift()
@@ -74,11 +82,17 @@ def main_frame():
     btn_frame.place(x=0, y=100, width=400, height=350)
     Button(btn_frame,text='헤어숍', command=hair_frame).pack()
     Button(btn_frame,text='티켓 예매', command=ticket_frame).pack()
+def identyF():
+    #여기서 정보를 리턴해주는 값을 해야할 듯
+    pass
+def final_frame():
+    reservation.paymentF()
 
 root = Tk()
 root.title("예약 매크로")
 root.geometry("400x300+300+300")
 
+frame4 = Frame(root, relief='solid')
 frame3 = Frame(root, relief='solid' )
 frame2 = Frame(root, relief='solid')
 frame1 = Frame(root, relief='solid')

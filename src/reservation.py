@@ -32,8 +32,7 @@ def getDays():
             selector = f'#root > main > section.section_calendar > div > div.section_content > div.calendar_area > div > table > tbody > tr:nth-child({i}) > td:nth-child({j}) > button.calendar_date'
             elements = soup.select(selector)
             for element in elements:
-                # calendar_date 클래스를 가진 요소만을 선택하고, unselectable 클래스를 가지지 않는 요소만을 선택합니다.
-                if 'calendar_date' in element.get('class', []) and 'unselectable' not in element.get('class', []):
+                if 'calendar_date' in element.get('class', []) and 'unselectable' not in element.get('class', []) and 'closed' not in element.get('class',[]):
                     date = element.find('span', class_='num').text
                     dates.append(date)
     return dates
@@ -47,18 +46,25 @@ def getTimes():
             selector = f'#root > main > section.section_calendar > div > div.section_content > div.calendar_area > div > table > tbody > tr:nth-child({i}) > td:nth-child({j}) > button.calendar_date'
             elements = soup.select(selector)
             for element in elements:
-                # calendar_date 클래스를 가진 요소만을 선택하고, unselectable 클래스를 가지지 않는 요소만을 선택합니다.
                 if 'calendar_date' in element.get('class', []) and 'unselectable' not in element.get('class', []):
                     date = element.find('span', class_='num').text
                     if date == tiki.res_day():
-                        # CSS 선택자를 사용하여 웹 요소를 찾습니다.
                         date_element = driver.find_element(By.CSS_SELECTOR, selector)
                         date_element.click()
-                        time.sleep(2)
-                        for i in range(1,7):  # 24시간을 가정합니다.
+
+                        for i in range(1,7):  
                             time_selector = f'#root > main > section.section_calendar > div > div.section_content > div.time_area > div > ul > li:nth-child({i}) > button.btn_time'
                             time_elements = driver.find_elements(By.CSS_SELECTOR, time_selector)
                             for time_element in time_elements:
                                 if 'unselectable' not in time_element.get_attribute('class'):
                                     times.append(time_element.text)                    
     return times
+
+def paymentF():
+    #TODO
+    #아이디 비밀번호 2차 받아오기
+    #예약하기 버튼 클릭
+    #아이디 비밀번호 입력하기
+    #스크롤 쭉 내려서 결제하기
+    #아이디 비밀번호 어떻게 받아올 지 생각좀 해봐. 그냥 가져오면 None값 들어가있어.
+    import tiki
